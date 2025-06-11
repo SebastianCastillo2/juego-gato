@@ -46,23 +46,34 @@ def movimiento_ia(tablero):
         fila, columna = random.choice(casillas_vacias)
         tablero[fila][columna] = "O"
 def juego_completo():
-    tablero = crear_tablero()
-    jugador_actual = "X"
-    while True:
-        imprimir_tablero(tablero)
-        print(f"Turno de {jugador_actual}")
-        if jugador_actual == "X":
-            movimiento_jugador(tablero, jugador_actual)
-        else:
-            movimiento_ia(tablero)
-        if hay_ganador(tablero):
-            print(f"¡{jugador_actual} ha ganado!")
-            break
-        if tablero_lleno(tablero):
-            print("¡Empate!")
-            break
-        if(jugador_actual=="O"):
-            jugador_actual="X"
-        else:
-            jugador_actual = "O"
+    victorias_x = 0
+    victorias_y = 0
+    partidas = 0
+    while partidas <4:
+        tablero = crear_tablero()
+        jugador_actual = "X"
+        while True:
+            imprimir_tablero(tablero)
+            print(f"Turno de {jugador_actual}")
+            if jugador_actual == "X":
+                movimiento_jugador(tablero, jugador_actual)
+            else:
+                movimiento_ia(tablero)
+            if hay_ganador(tablero):
+                print(f"¡{jugador_actual} ha ganado!")
+                if jugador_actual == "X":
+                    victorias_x += 1
+                else:
+                    victorias_y += 1
+                partidas += 1
+                break
+            if tablero_lleno(tablero):
+                print("¡Empate!")
+                partidas += 1
+                break
+            if(jugador_actual=="O"):
+                jugador_actual="X"
+            else:
+                jugador_actual = "O"
+        print(f"Marcador actual: Jugador X = {victorias_x}, Jugador O = {victorias_y}")
 juego_completo()
