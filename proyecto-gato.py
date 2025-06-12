@@ -41,10 +41,70 @@ def tablero_lleno(tablero):
             return False
     return True
 def movimiento_ia(tablero):
-    casillas_vacias = [(i, j) for i in range(3) for j in range(3) if tablero[i][j] == " "]
-    if casillas_vacias:
-        fila, columna = random.choice(casillas_vacias)
-        tablero[fila][columna] = "O"
+    if not combinaciones(tablero):
+        casillas_vacias = [(i, j) for i in range(3) for j in range(3) if tablero[i][j] == " "]
+        if casillas_vacias:
+            fila, columna = random.choice(casillas_vacias)
+            tablero[fila][columna] = "O"
+def combinaciones(tablero):
+    fila1 = [[(0,0),(0,1),(0,2)],
+             [(0,1),(0,2),(0,0)],
+             [(0,0),(0,2),(0,1)]]
+    fila2 = [[(1,0),(1,1),(1,2)],
+             [(1,1),(1,2),(1,0)],
+             [(1,0),(1,2),(1,1)]]
+    fila3 = [[(2,0),(2,1),(2,2)],
+             [(2,1),(2,2),(2,0)],
+             [(2,0),(2,2),(2,1)]]
+    columna1 = [[(0,0),(1,0),(2,0)],
+                [(1,0),(2,0),(0,0)],
+                [(0,0),(2,0),(1,0)]]
+    columna2 = [[(0,1),(1,1),(2,1)],
+                [(1,1),(2,1),(0,1)],
+                [(0,1),(2,1),(1,1)]]
+    columna3 = [[(0,2),(1,2),(2,2)],
+                [(1,2),(2,2),(0,2)],
+                [(0,2),(2,2),(1,2)]]
+    diagonal1 = [[(0,0),(1,1),(2,2)],
+                 [(1,1),(2,2),(0,0)],
+                 [(0,0),(2,2),(1,1)]]
+    diagonal2 = [[(0,2),(1,1),(2,0)],
+                 [(1,1),(2,0),(0,2)],
+                 [(0,2),(2,0),(1,1)]]
+
+    for a, b, c in fila1:
+        if tablero[a[0]][a[1]] == tablero[b[0]][b[1]] and tablero[c[0]][c[1]] == " ":
+            tablero[c[0]][c[1]] = "O"
+            return True
+    for a, b, c in fila2:
+        if tablero[a[0]][a[1]] == tablero[b[0]][b[1]] and tablero[c[0]][c[1]] == " ":
+            tablero[c[0]][c[1]] = "O"
+            return True
+    for a, b, c in fila3:
+        if tablero[a[0]][a[1]] == tablero[b[0]][b[1]] and tablero[c[0]][c[1]] == " ":
+            tablero[c[0]][c[1]] = "O"
+            return True
+    for a, b, c in columna1:
+        if tablero[a[0]][a[1]] == tablero[b[0]][b[1]] and tablero[c[0]][c[1]] == " ":
+            tablero[c[0]][c[1]] = "O"
+            return True
+    for a, b, c in columna2:
+        if tablero[a[0]][a[1]] == tablero[b[0]][b[1]] and tablero[c[0]][c[1]] == " ":
+            tablero[c[0]][c[1]] = "O"
+            return True
+    for a, b, c in columna3:
+        if tablero[a[0]][a[1]] == tablero[b[0]][b[1]] and tablero[c[0]][c[1]] == " ":
+            tablero[c[0]][c[1]] = "O"
+            return True
+    for a, b, c in diagonal1:
+        if tablero[a[0]][a[1]] == tablero[b[0]][b[1]] and tablero[c[0]][c[1]] == " ":
+            tablero[c[0]][c[1]] = "O"
+            return True
+    for a, b, c in diagonal2:
+        if tablero[a[0]][a[1]] == tablero[b[0]][b[1]] and tablero[c[0]][c[1]] == " ":
+            tablero[c[0]][c[1]] = "O"
+            return True
+    return False
 def juego_completo():
     victorias_x = 0
     victorias_y = 0
